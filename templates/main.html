@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="../static/styles.css" type="text/css">
+
+<!DOCTYPE html>
+
+<head>
+    <title>Control RPi Web Server</title>
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="main-screen">
+            <div class="app-title">
+                <h1>Garage System</h1>
+                <h2>RPi Web Server</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="/close" class="btn btn-block btn-lg btn-default" role="button">Close Garage Door</a>
+                    <a href="/open" class="btn btn-block btn-lg btn-primary" role="button">Open Garage Door</a>
+                </div>
+            </div>
+            <br>
+            <div class="flash">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="login-form">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <p>Garage Door State: <br> {% if state == 'open' %} Open {% else %} Closed {% endif %}</p>
+            <br>
+            <p>Manage account? <a href="#" onclick="toggleManageForm()">Click me</a></p>
+            <p>Don't forget to logout :) </p>
+            <div class="row">
+                <div class="col-md-2">
+                    <a class="logout" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="manageForm" style="display: none;">
+            <form action="/manage" method="POST">
+                <div class="manage">
+                    <div class="manage-screen">
+                        <div class="app-title">
+                            <h1>Manage Access</h1>
+                            <h2>List of Users:</h2>
+                            {% if subusers %}
+                            <h2>Subusers Information:</h2>
+                            <table id="table">
+                                <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Username</th>
+                                        <th>Joining Date</th>
+                                        <th>Last Login</th>
+                                        <th>Last Attempt to Open Garage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for subuser in subusers %}
+                                    <tr>
+                                        <td>{{ subuser['email'] }}</td>
+                                        <td>{{ subuser['username'] }}</td>
+                                        <td>{{ subuser['joining_date'] }}</td>
+                                        <td>{{ subuser['last_login'] }}</td>
+                                        <td>{{ subuser['last_attempt_to_open_garage'] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <p>No subusers found for the admin.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <p>Return to system? <a href="#" onclick="toggleManageForm()">Click me</a></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleManageForm() {
+            var manageForm = document.getElementById("manageForm");
+            var main = document.querySelector(".main-screen");
+
+            if (manageForm.style.display === "none") {
+                manageForm.style.display = "block";
+                main.style.display = "none";
+            } else {
+                manageForm.style.display = "none";
+                main.style.display = "block";
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+{% block body %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/styles.css" type="text/css">
+    <title>RPi Garage System</title>
+  </head>
+  <body>
+    <div id="loginForm">
+      <form action="/login" method="POST">
+        <div class="login">
+          <div class="login-screen">
+            <div class="app-title">
+              <h1>Welcome Back!</h1>
+              <h3>Please Login to your Account</h3>
+            </div>
+            
+            <div class="login-form">
+              <div class="control-group">
+                <input type="email" class="login-field" value="" placeholder="Email" name="email">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>
+              <div class="control-group">
+                <input type="password" class="login-field" value="" placeholder="Password" name="login_password">
+                <label class="login-field-icon fui-lock" for="login_password"></label>
+              </div>
+              <div class = "flash">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul class="login-form">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+              </div>
+
+              <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block"> 
+              <p>New User? <a href="#" onclick="toggleForm()">Create Account</a></p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div id="signupForm" style="display: none;">
+      <form action="/signup" method="POST">
+        <div class="login">
+          <div class="login-screen">
+            <div class="app-title">
+              <h1>Create an Account</h1>
+              <h3>Please fill in the details</h3>
+            </div>
+            
+            <div class="login-form">
+
+              <div class="control-group">
+                <input type="text" class="login-field" value="" placeholder="Username" name="username">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>
+
+              <div class="control-group">
+                <input type="email" class="login-field" value="" placeholder="Email" name="email">
+                <label class="login-field-icon fui-user" for="login-email"></label>
+              </div>
+
+              <div class="control-group">
+                <input type="password" class="login-field" value="" placeholder="password" name="sign_up_password">
+                <label class="login-field-icon fui-lock" for="sign_up_password"></label>
+              </div>
+
+                <div class="control-group">
+                    <label for="role">Role:</label><br>
+                    <select name="role" id="role" onchange="toggleAdminEmailField()">
+                        <option value="admin">Admin</option>
+                        <option value="sub_user">Sub User</option>
+                    </select>
+                </div>
+
+                <div class="control-group" id="adminEmailField" style="display: none;">
+                    <input type="email" class="login-field" value="" placeholder="Admin Email" name="admin_email">
+                    <label class="login-field-icon fui-user" for="admin_email"></label>
+                </div>
+
+                <div class="control-group" id="pinFieldAdmin">
+                    <input type="text" class="login-field" value="" placeholder="Admin Special Pin to Authorize Users" name="special_pin_admin">
+                    <label class="login-field-icon fui-lock" for="special_pin_admin"></label>
+                </div>
+
+                <div class="control-group" id="pinField" style = "display: none;">
+                    <input type="text" class="login-field" value="" placeholder="Special Pin" name="special_pin">
+                    <label class="login-field-icon fui-lock" for="special_pin"></label>
+                </div>  
+
+
+              <div class = "flash">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul class="login-form">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+              </div>
+              <input type="submit" value="Create Account" class="btn btn-primary btn-large btn-block"> 
+              <p>Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+    function toggleForm() {
+        var loginForm = document.getElementById("loginForm");
+        var signupForm = document.getElementById("signupForm");
+
+        if (loginForm.style.display === "none") {
+          loginForm.style.display = "block";
+          signupForm.style.display = "none";
+        } else {
+          loginForm.style.display = "none";
+          signupForm.style.display = "block";
+        }
+      }
+
+    function toggleAdminEmailField() {
+
+        var role = document.getElementById("role").value;
+        var adminEmailField = document.getElementById("adminEmailField");
+        var pinFieldAdmin = document.getElementById("pinFieldAdmin");
+        var pinField = document.getElementById("pinField");
+
+        if (role === "admin") {
+            adminEmailField.style.display = "none";
+            pinFieldAdmin.style.display = "block";
+            pinField.style.display = "none";
+        } else if (role === "sub_user") {
+            adminEmailField.style.display = "block";
+            pinFieldAdmin.style.display = "none";
+            pinField.style.display = "block";
+        }
+    }
+
+
+    </script>
+  </body>
+</html>
+{% endblock %}

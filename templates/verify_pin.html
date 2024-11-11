@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="../static/styles.css" type="text/css">
+
+{% block body %}
+
+
+<form action="/verify_pin" method="POST">
+<div class="verify_pin">
+    <div class="verify_screen">
+        <div class="app-title">
+            <h1>Verify Your Pin</h1>
+            <h3><label for="otp">Please click the button to generate an verfication pin.</label></h3>
+
+        </div>
+        
+        <div class="login-form">
+            <div class = "control-group">
+                <input type = "text" class ="login-field" value = "" placeholder="One-Time Pin" name = "oneTimePin"><br>
+             </div>
+             
+             <input type="submit" value="Submit Pin." class="btn btn-primary btn-large btn-block">
+             <a href="/generate_2fa_pin" class="btn btn-primary btn-large btn-block">Generate new pin</a>
+
+            <div class="flash">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="login-form">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+       </div>
+    </div>
+</div>
+</form>
+{% endblock %}

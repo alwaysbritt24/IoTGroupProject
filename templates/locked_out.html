@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="../static/styles.css" type="text/css">
+
+{% block body %}
+
+
+
+<form action="/locked_out" method="POST">
+<div class="lockedOut">
+    <div class="lockout-screen">
+        <div class="app-title">
+            <h1>Uh Oh.</h1> <p>Maximum incorrect attempts have been reached. <br> You have been locked out. </p>
+            <label for="otp">Please click the button to generate an unlock pin.</label><br>
+
+        </div>
+        
+        <div class="login-form">
+            <div class = "control-group">
+                <input type = "text" class ="login-field" value = "" placeholder="One-Time Pin" name = "oneTimePin"><br>
+             </div>
+             
+             <input type="submit" value="Submit Pin" class="btn btn-primary btn-large btn-block">
+             <a href="/generate_unlock_pin" class="btn btn-primary btn-large btn-block">Generate new pin</a>
+             <div class = "flash">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul class="login-form">
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+              </div>
+       </div>
+    </div>
+</div>
+</form>
+{% endblock %}

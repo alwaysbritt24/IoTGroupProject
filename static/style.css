@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  font-family: Arial;
+  background-color: #14171B;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.createAcc,
+.login,
+.lockedOut,
+.main,
+.verify_pin {
+  margin: 20px auto;
+  width: 600px;
+}
+
+.ca-screen,
+.login-screen,
+.lockout-screen,
+.main-screen,
+.verify_screen {
+  margin-top: 140px;
+  background-color: #202429;
+  padding: 20px;
+  border-radius: 50px;
+  box-shadow: 10px 10px #0e1012;
+}
+
+.app-title,
+p,
+h3 {
+  color: #777;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.ca-form,
+.login-form,
+.main,
+.app-title {
+  text-align: center;
+}
+
+.control-group {
+  margin-bottom: 10px;
+}
+
+input {
+  text-align: center;
+  background-color: #3a414a;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 200;
+  padding: 10px 0;
+  width: 280px;
+  transition: border .5s;
+  color: white;
+}
+
+input:focus {
+  border: 2px solid #3498DB;
+  box-shadow: none;
+}
+
+.btn {
+  border: 2px solid transparent;
+  background: #a381ba;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 15px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 10px auto;
+}
+
+label {
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#table {
+  color: white;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+
+.flash {
+  color: white;
+  text-align: center;
+}
+
